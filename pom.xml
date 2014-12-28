@@ -5,7 +5,7 @@
 	<parent>
 		<groupId>be.hobbiton</groupId>
 		<artifactId>oss-parent</artifactId>
-		<version>7.0</version>
+		<version>9.0</version>
 	</parent>
 
 	<groupId>be.hobbiton.jersey</groupId>
@@ -36,7 +36,7 @@
 		<dependency>
 			<groupId>com.sun.jersey.contribs.jersey-oauth</groupId>
 			<artifactId>oauth-signature</artifactId>
-			<version>1.16</version>
+			<version>1.18.3</version>
 			<optional>true</optional>
 		</dependency>
 	</dependencies>
