@@ -4,6 +4,12 @@ import java.math.BigInteger;
 import java.util.Arrays;
 
 
+/**
+ * Stream Reader for length encoded entities used for SSH public keys
+ *
+ * @author <a href="mailto:gert@hobbiton.be">Gert Dewit</a>
+ *
+ */
 public class SshBufferStream {
 	private byte[] bytes;
 	private int pos;

@@ -14,12 +14,34 @@ public class SshRsaPublicKeyTest {
 	@Test
 	public void testReadRsa2048PublicKey() throws SshRsaPublicKeyException {
 		SshRsaPublicKey rsaPublicKey = new SshRsaPublicKey(SSH_RSA_2048_PUBLIC_KEY);
-		assertEquals(SSH_RSA_2048_PUBLIC_EXPONENT, rsaPublicKey.getPublicExponent());
-		assertEquals(SSH_RSA_2048_PUBLIC_MODULUS, rsaPublicKey.getModulus());
+		assertEquals(SSH_RSA_PUBLIC_EXPONENT, rsaPublicKey.getPublicExponent());
+		assertEquals(SSH_RSA_2048_MODULUS, rsaPublicKey.getModulus());
 		assertEquals(SSH_RSA_2048_LENGTH, rsaPublicKey.getModulus().bitLength());
 		assertEquals("RSA", rsaPublicKey.getAlgorithm());
 		assertEquals("X.509", rsaPublicKey.getFormat());
 		assertEquals(279, rsaPublicKey.getEncoded().length);
+	}
+
+	@Test
+	public void testReadRsa768PublicKey() throws SshRsaPublicKeyException {
+		SshRsaPublicKey rsaPublicKey = new SshRsaPublicKey(SSH_RSA_768_PUBLIC_KEY);
+		assertEquals(SSH_RSA_PUBLIC_EXPONENT, rsaPublicKey.getPublicExponent());
+		assertEquals(SSH_RSA_768_MODULUS, rsaPublicKey.getModulus());
+		assertEquals(SSH_RSA_768_LENGTH, rsaPublicKey.getModulus().bitLength());
+		assertEquals("RSA", rsaPublicKey.getAlgorithm());
+		assertEquals("X.509", rsaPublicKey.getFormat());
+		assertEquals(119, rsaPublicKey.getEncoded().length);
+	}
+
+	@Test
+	public void testReadRsa4096PublicKey() throws SshRsaPublicKeyException {
+		SshRsaPublicKey rsaPublicKey = new SshRsaPublicKey(SSH_RSA_4096_PUBLIC_KEY);
+		assertEquals(SSH_RSA_PUBLIC_EXPONENT, rsaPublicKey.getPublicExponent());
+		assertEquals(SSH_RSA_4096_MODULUS, rsaPublicKey.getModulus());
+		assertEquals(SSH_RSA_4096_LENGTH, rsaPublicKey.getModulus().bitLength());
+		assertEquals("RSA", rsaPublicKey.getAlgorithm());
+		assertEquals("X.509", rsaPublicKey.getFormat());
+		assertEquals(535, rsaPublicKey.getEncoded().length);
 	}
 
 	@Test(expected = SshRsaPublicKeyException.class)

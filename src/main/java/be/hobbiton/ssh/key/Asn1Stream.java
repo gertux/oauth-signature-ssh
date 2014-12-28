@@ -3,6 +3,14 @@ package be.hobbiton.ssh.key;
 import java.math.BigInteger;
 import java.util.Arrays;
 
+/**
+ * Minimal ITU-T X.690 ASN.1 Stream reader, implements only what's necessary for reading SSH RSA private keys
+ * <p>
+ * <a href="http://www.itu.int/ITU-T/studygroups/com17/languages/X.690-0207.pdf">ITU-T X.690 ASN.1 Specification</a>
+ *
+ * @author <a href="mailto:gert@hobbiton.be">Gert Dewit</a>
+ *
+ */
 public class Asn1Stream {
 	public static final byte ASN1_INTEGER_TYPE = 0x02;
 	public static final byte ASN1_SEQUENCE_TYPE = 0x30;
