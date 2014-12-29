@@ -14,6 +14,7 @@ public class SshRsaPrivateKeyTest {
 	@Test
 	public void testReadRsa2048PrivateKey() throws SshRsaPrivateKeyException {
 		SshRsaPrivateKey rsaPrivateKey = new SshRsaPrivateKey(SSH_RSA_2048_PRIVATE_KEY);
+		assertEquals(SSH_RSA_2048_MODULUS, SSH_RSA_2048_MODULUS_0X);
 		assertEquals(SSH_RSA_2048_MODULUS, rsaPrivateKey.getModulus());
 		assertEquals(SSH_RSA_2048_LENGTH, rsaPrivateKey.getModulus().bitLength());
 		assertEquals(SSH_RSA_2048_PRIVATE_EXPONENT, rsaPrivateKey.getPrivateExponent());
@@ -53,6 +54,7 @@ public class SshRsaPrivateKeyTest {
 	@Test
 	public void testReadRsa4096PrivateKey() throws SshRsaPrivateKeyException {
 		SshRsaPrivateKey rsaPrivateKey = new SshRsaPrivateKey(SSH_RSA_4096_PRIVATE_KEY);
+		assertEquals(SSH_RSA_4096_MODULUS, SSH_RSA_4096_MODULUS_0X);
 		assertEquals(SSH_RSA_4096_MODULUS, rsaPrivateKey.getModulus());
 		assertEquals(SSH_RSA_4096_LENGTH, rsaPrivateKey.getModulus().bitLength());
 		assertEquals(SSH_RSA_4096_PRIVATE_EXPONENT, rsaPrivateKey.getPrivateExponent());
@@ -77,4 +79,5 @@ public class SshRsaPrivateKeyTest {
 	public void testMissingFooter() throws SshRsaPrivateKeyException {
 		new SshRsaPrivateKey(SSH_RSA_PRIVATE_KEY_HEADER + SSH_RSA_2048_PRIVATE_KEY_BODY);
 	}
+
 }

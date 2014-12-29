@@ -44,9 +44,9 @@ public class SshBufferStream {
 		if ((this.pos + 4) > this.bytes.length) {
 			throw new SshBufferOutOfBoundsException("Unexpected end of buffer");
 		}
-		int intValue = ((this.bytes[this.pos] << 24) + (this.bytes[this.pos + 1] << 16) + (this.bytes[this.pos + 2] << 8) + this.bytes[this.pos + 3]);
+		BigInteger bigInteger = new BigInteger(Arrays.copyOfRange(this.bytes, this.pos, this.pos + 4));
 		this.pos += 4;
-		return intValue;
+		return bigInteger.intValue();
 	}
 
 	public static class SshBufferException extends RuntimeException {
