@@ -1,32 +1,27 @@
 package be.hobbiton.ssh.key;
 
 import java.math.BigInteger;
-import java.security.InvalidKeyException;
 import java.security.interfaces.DSAParams;
 import java.security.interfaces.DSAPublicKey;
 
-import com.sun.jersey.core.util.Base64;
-
-public class SshDsaPublicKey implements DSAPublicKey {
+/**
+ * A {@link DSAPublicKey} implementation for SSH DSA Keys
+ *
+ * @author <a href="mailto:gert@hobbiton.be">Gert Dewit</a>
+ *
+ */
+public class SshDsaPublicKey extends SshPublicKey implements DSAPublicKey {
 	private static final long serialVersionUID = -6879294591125282668L;
 	private static final String KEY_FORMAT = "ssh-dss";
 	private DSAParams dsaParams;
 	private BigInteger y;
-	private byte[] bytes;
 
-	public SshDsaPublicKey(String keyString) throws SshDsaPublicKeyException {
-		if (keyString == null) {
-			throw new SshDsaPublicKeyException("Empty public key");
-		}
-		String[] contents = keyString.split(" ");
-		if (contents.length != 3) {
-			throw new SshDsaPublicKeyException("Invalid public key");
-		}
-		this.bytes = Base64.decode(contents[1]);
-		SshBufferStream stream = new SshBufferStream(this.bytes);
+	public SshDsaPublicKey(String keyString) throws SshPublicKeyException {
+		super(keyString);
+		SshBufferStream stream = new SshBufferStream(getEncoded());
 		String keyFormat = stream.readString();
 		if (!KEY_FORMAT.equals(keyFormat)) {
-			throw new SshDsaPublicKeyException("Invalid public key format");
+			throw new SshPublicKeyException("Invalid public key format");
 		}
 		BigInteger modulus = stream.readInteger();
 		BigInteger divisor = stream.readInteger();
@@ -46,25 +41,12 @@ public class SshDsaPublicKey implements DSAPublicKey {
 	}
 
 	@Override
-	public String getFormat() {
-		return "X.509";
-	}
-
-	@Override
-	public byte[] getEncoded() {
-		return this.bytes;
-	}
-
-	@Override
 	public BigInteger getY() {
 		return this.y;
 	}
 
-	public static class SshDsaPublicKeyException extends InvalidKeyException {
-		private static final long serialVersionUID = -3908384691027431643L;
-
-		public SshDsaPublicKeyException(String message) {
-			super(message);
-		}
+	@Override
+	protected String getKeyFormat() {
+		return KEY_FORMAT;
 	}
 }

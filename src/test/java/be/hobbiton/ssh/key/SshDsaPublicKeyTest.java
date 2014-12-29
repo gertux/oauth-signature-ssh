@@ -7,13 +7,13 @@ import java.security.interfaces.DSAParams;
 
 import org.junit.Test;
 
-import be.hobbiton.ssh.key.SshDsaPublicKey.SshDsaPublicKeyException;
+import be.hobbiton.ssh.key.SshPublicKey.SshPublicKeyException;
 
 public class SshDsaPublicKeyTest {
 	private static final String[] KEY_PARTS = SSH_DSA_PUBLIC_KEY.split(" ");
 
 	@Test
-	public void testReadDsaPublicKey() throws SshDsaPublicKeyException {
+	public void testReadDsaPublicKey() throws SshPublicKeyException {
 		SshDsaPublicKey dsaPublicKey = new SshDsaPublicKey(SSH_DSA_PUBLIC_KEY);
 		DSAParams dsaParams = dsaPublicKey.getParams();
 		assertNotNull(dsaParams);
@@ -23,23 +23,23 @@ public class SshDsaPublicKeyTest {
 		assertEquals(SSH_DSA_PUBLIC_EXPONENT, dsaPublicKey.getY());
 	}
 
-	@Test(expected = SshDsaPublicKeyException.class)
-	public void testConstructWrongKeyFormat() throws SshDsaPublicKeyException {
+	@Test(expected = SshPublicKeyException.class)
+	public void testConstructWrongKeyFormat() throws Exception {
 		new SshDsaPublicKey(SSH_RSA_2048_PUBLIC_KEY);
 	}
 
-	@Test(expected = SshDsaPublicKeyException.class)
-	public void testConstructBadContents() throws SshDsaPublicKeyException {
+	@Test(expected = SshPublicKeyException.class)
+	public void testConstructBadContents() throws Exception {
 		new SshDsaPublicKey(KEY_PARTS[0] + " " + KEY_PARTS[1]);
 	}
 
-	@Test(expected = SshDsaPublicKeyException.class)
-	public void testConstructEmpty() throws SshDsaPublicKeyException {
+	@Test(expected = SshPublicKeyException.class)
+	public void testConstructEmpty() throws Exception {
 		new SshDsaPublicKey("");
 	}
 
-	@Test(expected = SshDsaPublicKeyException.class)
-	public void testConstructNull() throws SshDsaPublicKeyException {
+	@Test(expected = SshPublicKeyException.class)
+	public void testConstructNull() throws Exception {
 		new SshDsaPublicKey(null);
 	}
 }

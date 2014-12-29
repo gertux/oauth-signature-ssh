@@ -5,14 +5,14 @@ import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 
-import be.hobbiton.ssh.key.SshRsaPublicKey.SshRsaPublicKeyException;
+import be.hobbiton.ssh.key.SshPublicKey.SshPublicKeyException;
 
 public class SshRsaPublicKeyTest {
 	private static final String[] KEY_PARTS = SSH_RSA_2048_PUBLIC_KEY.split(" ");
 
 
 	@Test
-	public void testReadRsa2048PublicKey() throws SshRsaPublicKeyException {
+	public void testReadRsa2048PublicKey() throws Exception {
 		SshRsaPublicKey rsaPublicKey = new SshRsaPublicKey(SSH_RSA_2048_PUBLIC_KEY);
 		assertEquals(SSH_RSA_PUBLIC_EXPONENT, rsaPublicKey.getPublicExponent());
 		assertEquals(SSH_RSA_2048_MODULUS, rsaPublicKey.getModulus());
@@ -23,7 +23,7 @@ public class SshRsaPublicKeyTest {
 	}
 
 	@Test
-	public void testReadRsa768PublicKey() throws SshRsaPublicKeyException {
+	public void testReadRsa768PublicKey() throws Exception {
 		SshRsaPublicKey rsaPublicKey = new SshRsaPublicKey(SSH_RSA_768_PUBLIC_KEY);
 		assertEquals(SSH_RSA_PUBLIC_EXPONENT, rsaPublicKey.getPublicExponent());
 		assertEquals(SSH_RSA_768_MODULUS, rsaPublicKey.getModulus());
@@ -34,7 +34,7 @@ public class SshRsaPublicKeyTest {
 	}
 
 	@Test
-	public void testReadRsa4096PublicKey() throws SshRsaPublicKeyException {
+	public void testReadRsa4096PublicKey() throws Exception {
 		SshRsaPublicKey rsaPublicKey = new SshRsaPublicKey(SSH_RSA_4096_PUBLIC_KEY);
 		assertEquals(SSH_RSA_PUBLIC_EXPONENT, rsaPublicKey.getPublicExponent());
 		assertEquals(SSH_RSA_4096_MODULUS, rsaPublicKey.getModulus());
@@ -44,23 +44,23 @@ public class SshRsaPublicKeyTest {
 		assertEquals(535, rsaPublicKey.getEncoded().length);
 	}
 
-	@Test(expected = SshRsaPublicKeyException.class)
-	public void testConstructWrongKeyFormat() throws SshRsaPublicKeyException {
+	@Test(expected = SshPublicKeyException.class)
+	public void testConstructWrongKeyFormat() throws Exception {
 		new SshRsaPublicKey(SSH_DSA_PUBLIC_KEY);
 	}
 
-	@Test(expected = SshRsaPublicKeyException.class)
-	public void testConstructBadContents() throws SshRsaPublicKeyException {
+	@Test(expected = SshPublicKeyException.class)
+	public void testConstructBadContents() throws Exception {
 		new SshRsaPublicKey(KEY_PARTS[0] + " " + KEY_PARTS[1]);
 	}
 
-	@Test(expected = SshRsaPublicKeyException.class)
-	public void testConstructEmpty() throws SshRsaPublicKeyException {
+	@Test(expected = SshPublicKeyException.class)
+	public void testConstructEmpty() throws Exception {
 		new SshRsaPublicKey("");
 	}
 
-	@Test(expected = SshRsaPublicKeyException.class)
-	public void testConstructNull() throws SshRsaPublicKeyException {
+	@Test(expected = SshPublicKeyException.class)
+	public void testConstructNull() throws Exception {
 		new SshRsaPublicKey(null);
 	}
 }

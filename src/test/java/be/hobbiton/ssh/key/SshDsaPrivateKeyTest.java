@@ -7,11 +7,11 @@ import java.math.BigInteger;
 
 import org.junit.Test;
 
-import be.hobbiton.ssh.key.SshDsaPrivateKey.SshDsaPrivateKeyException;
+import be.hobbiton.ssh.key.SshPrivateKey.SshPrivateKeyException;
 
 public class SshDsaPrivateKeyTest {
 	@Test
-	public void testReadDsaPrivateKey() throws SshDsaPrivateKeyException {
+	public void testReadDsaPrivateKey() throws Exception {
 		SshDsaPrivateKey dsaPrivateKey = new SshDsaPrivateKey(SSH_DSA_PRIVATE_KEY);
 		assertEquals(SSH_DSA_MODULUS, dsaPrivateKey.getParams().getP());
 		assertEquals(SSH_DSA_DIVISOR, dsaPrivateKey.getParams().getQ());
@@ -24,18 +24,18 @@ public class SshDsaPrivateKeyTest {
 		assertEquals(448, dsaPrivateKey.getEncoded().length);
 	}
 
-	@Test(expected = SshDsaPrivateKeyException.class)
-	public void testASNException() throws SshDsaPrivateKeyException {
+	@Test(expected = SshPrivateKeyException.class)
+	public void testASNException() throws Exception {
 		new SshDsaPrivateKey(SSH_DSA_PRIVATE_KEY_HEADER + "AgMPDw8=\n" + SSH_DSA_PRIVATE_KEY_FOOTER);
 	}
 
-	@Test(expected = SshDsaPrivateKeyException.class)
-	public void testMissingHeader() throws SshDsaPrivateKeyException {
+	@Test(expected = SshPrivateKeyException.class)
+	public void testMissingHeader() throws Exception {
 		new SshDsaPrivateKey(SSH_DSA_PRIVATE_KEY_BODY + SSH_DSA_PRIVATE_KEY_FOOTER);
 	}
 
-	@Test(expected = SshDsaPrivateKeyException.class)
-	public void testMissingFooter() throws SshDsaPrivateKeyException {
+	@Test(expected = SshPrivateKeyException.class)
+	public void testMissingFooter() throws Exception {
 		new SshDsaPrivateKey(SSH_DSA_PRIVATE_KEY_HEADER + SSH_DSA_PRIVATE_KEY_BODY);
 	}
 
