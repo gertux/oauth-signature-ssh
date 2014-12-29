@@ -6,7 +6,7 @@ import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
 
-import be.hobbiton.jersey.oauth.signature.SSH_RSA.InvalidSshRsaSecretException;
+import be.hobbiton.jersey.oauth.signature.SshOAuthSignatureMethod.InvalidSshSecretException;
 
 import com.sun.jersey.oauth.signature.OAuthSecrets;
 
@@ -65,7 +65,7 @@ public class SSH_RSATest {
 		assertTrue(this.signatureMethod.verify(SSH_RSA_PAYLOAD, secrets, SSH_RSA_4096_SIGNATURE));
 	}
 
-	@Test(expected = InvalidSshRsaSecretException.class)
+	@Test(expected = InvalidSshSecretException.class)
 	public void testSignBadKey() throws Exception {
 		OAuthSecrets secrets = new OAuthSecrets().consumerSecret(SSH_RSA_2048_PUBLIC_KEY).tokenSecret(TOKEN_SECRET);
 
@@ -79,7 +79,7 @@ public class SSH_RSATest {
 		assertFalse(this.signatureMethod.verify(SSH_RSA_PAYLOAD, secrets, SSH_RSA_INVALID_SIGNATURE));
 	}
 
-	@Test(expected = InvalidSshRsaSecretException.class)
+	@Test(expected = InvalidSshSecretException.class)
 	public void testVerifyBadKey() throws Exception {
 		OAuthSecrets secrets = new OAuthSecrets().consumerSecret(SSH_RSA_2048_PRIVATE_KEY).tokenSecret(TOKEN_SECRET);
 

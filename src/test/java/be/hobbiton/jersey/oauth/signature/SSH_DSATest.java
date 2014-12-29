@@ -6,7 +6,7 @@ import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
 
-import be.hobbiton.jersey.oauth.signature.SSH_DSA.InvalidSshDsaSecretException;
+import be.hobbiton.jersey.oauth.signature.SshOAuthSignatureMethod.InvalidSshSecretException;
 
 import com.sun.jersey.oauth.signature.OAuthSecrets;
 
@@ -48,21 +48,21 @@ public class SSH_DSATest {
 		assertFalse(this.signatureMethod.verify(SSH_DSA_PAYLOAD, secrets, SSH_DSA_INVALID_SIGNATURE));
 	}
 
-	@Test(expected = InvalidSshDsaSecretException.class)
+	@Test(expected = InvalidSshSecretException.class)
 	public void testVerifyBadEncodedSig() throws Exception {
 		OAuthSecrets secrets = new OAuthSecrets().consumerSecret(SSH_DSA_PUBLIC_KEY).tokenSecret(TOKEN_SECRET);
 
 		this.signatureMethod.verify(SSH_DSA_PAYLOAD, secrets, SSH_DSA_BAD_ENCODED_SIGNATURE);
 	}
 
-	@Test(expected = InvalidSshDsaSecretException.class)
+	@Test(expected = InvalidSshSecretException.class)
 	public void testSignBadKey() throws Exception {
 		OAuthSecrets secrets = new OAuthSecrets().consumerSecret(SSH_DSA_PUBLIC_KEY).tokenSecret(TOKEN_SECRET);
 
 		this.signatureMethod.sign(SSH_DSA_PAYLOAD, secrets);
 	}
 
-	@Test(expected = InvalidSshDsaSecretException.class)
+	@Test(expected = InvalidSshSecretException.class)
 	public void testVerifyBadKey() throws Exception {
 		OAuthSecrets signSecrets = new OAuthSecrets().consumerSecret(SSH_DSA_PRIVATE_KEY).tokenSecret(TOKEN_SECRET);
 
