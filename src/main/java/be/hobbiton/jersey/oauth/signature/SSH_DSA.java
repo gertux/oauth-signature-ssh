@@ -9,6 +9,12 @@ import be.hobbiton.ssh.key.SshDsaPublicKey;
 
 import com.sun.jersey.oauth.signature.OAuthSignatureMethod;
 
+/**
+ * An {@link OAuthSignatureMethod} implementation for SSH DSA Keys
+ *
+ * @author <a href="mailto:gert@hobbiton.be">Gert Dewit</a>
+ *
+ */
 public class SSH_DSA extends SshOAuthSignatureMethod implements OAuthSignatureMethod {
 	public static final String NAME = "SSH-DSA";
 	private static final String SIGNATURE_ALGORITHM = "SHA1withDSA";

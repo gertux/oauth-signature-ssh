@@ -1,8 +1,8 @@
 # Jersey OAuth 1 signature extension for SSH keys
 
-With this extension to Jersey OAuth 1, one can use her SSH RSA keys to sign and verify her requests
+With this extension to Jersey OAuth 1, one can use her SSH RSA or DSA keys to sign and verify her requests
 
-The current implementation is only tested with [Jersey 1.16](https://jersey.java.net/documentation/1.16/index.html) because that's the version I'm using.
+The current implementation is mainly tested with [Jersey 1.16](https://jersey.java.net/documentation/1.16/index.html) because that's the version I'm using. The latest 1.x Jersey version is also tested, version 1.18.3 currently.
 
 ## Maven
 
@@ -32,3 +32,4 @@ OAuthParameters params = new OAuthParameters()
 		.version();
 ```
 
+For SSH DSA keys use SSH_DSA.NAME.
