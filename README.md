@@ -11,11 +11,11 @@ When using maven as build system, the dependency is:
 <dependency>
 	<groupId>be.hobbiton.jersey</groupId>
 	<artifactId>oauth-signature-ssh</artifactId>
-	<version>1.0.0</version>
+	<version>1.0.1</version>
 </dependency>
 ```
 	
-The artifacts are published in [Maven Central](http://search.maven.org)
+The artifacts are published in [Maven Central](http://search.maven.org/#search|ga|1|g%3A%22be.hobbiton.jersey%22%20a%3A%22oauth-signature-ssh%22)
 
 ## Usage
 
