@@ -1,7 +1,7 @@
 package be.hobbiton.ssh.key;
 
 import static be.hobbiton.jersey.oauth.signature.ExampleKeys.*;
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.*;
 
 import java.math.BigInteger;
 
@@ -21,7 +21,11 @@ public class SshDsaPrivateKeyTest {
 		assertEquals(BigInteger.ZERO, dsaPrivateKey.getVersion());
 		assertEquals("DSA", dsaPrivateKey.getAlgorithm());
 		assertEquals("PKCS#8", dsaPrivateKey.getFormat());
-		assertEquals(448, dsaPrivateKey.getEncoded().length);
+		byte[] encoded = dsaPrivateKey.getEncoded();
+		assertEquals(448, encoded.length);
+		byte[] encodedAgain = dsaPrivateKey.getEncoded();
+		assertArrayEquals(encoded, encodedAgain);
+		assertNotEquals(encoded, encodedAgain);
 	}
 
 	@Test(expected = SshPrivateKeyException.class)

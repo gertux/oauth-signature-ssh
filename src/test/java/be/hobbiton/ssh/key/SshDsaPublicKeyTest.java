@@ -21,6 +21,11 @@ public class SshDsaPublicKeyTest {
 		assertEquals(SSH_DSA_DIVISOR, dsaParams.getQ());
 		assertEquals(SSH_DSA_GENERATOR, dsaParams.getG());
 		assertEquals(SSH_DSA_PUBLIC_EXPONENT, dsaPublicKey.getY());
+		byte[] encoded = dsaPublicKey.getEncoded();
+		assertEquals(434, encoded.length);
+		byte[] encodedAgain = dsaPublicKey.getEncoded();
+		assertArrayEquals(encoded, encodedAgain);
+		assertNotEquals(encoded, encodedAgain);
 	}
 
 	@Test(expected = SshPublicKeyException.class)

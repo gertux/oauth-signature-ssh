@@ -1,7 +1,7 @@
 package be.hobbiton.ssh.key;
 
 import static be.hobbiton.jersey.oauth.signature.ExampleKeys.*;
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.*;
 
 import java.math.BigInteger;
 
@@ -22,7 +22,11 @@ public class SshRsaPrivateKeyTest {
 		assertEquals(BigInteger.ZERO, rsaPrivateKey.getVersion());
 		assertEquals("RSA", rsaPrivateKey.getAlgorithm());
 		assertEquals("PKCS#8", rsaPrivateKey.getFormat());
-		assertEquals(1193, rsaPrivateKey.getEncoded().length);
+		byte[] encoded = rsaPrivateKey.getEncoded();
+		assertEquals(1193, encoded.length);
+		byte[] encodedAgain = rsaPrivateKey.getEncoded();
+		assertArrayEquals(encoded, encodedAgain);
+		assertNotEquals(encoded, encodedAgain);
 	}
 
 	@Test

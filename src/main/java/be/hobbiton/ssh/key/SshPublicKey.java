@@ -32,7 +32,7 @@ public abstract class SshPublicKey implements PublicKey {
 
 	@Override
 	public byte[] getEncoded() {
-		return this.bytes;
+		return this.bytes.clone();
 	}
 
 	public static class SshPublicKeyException extends InvalidKeyException {

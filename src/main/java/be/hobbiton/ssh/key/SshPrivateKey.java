@@ -31,7 +31,8 @@ public abstract class SshPrivateKey implements PrivateKey {
 		if (endIndex == -1) {
 			throw new SshPrivateKeyException(getKeySuffix() + " not found");
 		}
-		String cleanKeyString = keyString.substring(beginIndex + getKeyPrefix().length(), endIndex).replaceAll("[\r\n]", "");
+		String cleanKeyString = keyString.substring(beginIndex + getKeyPrefix().length(), endIndex).replaceAll(
+				"[\r\n]", "");
 		this.bytes = Base64.decode(cleanKeyString);
 	}
 
@@ -42,7 +43,7 @@ public abstract class SshPrivateKey implements PrivateKey {
 
 	@Override
 	public byte[] getEncoded() {
-		return this.bytes;
+		return this.bytes.clone();
 	}
 
 	public static class SshPrivateKeyException extends InvalidKeyException {
